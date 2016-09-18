@@ -1,8 +1,8 @@
-n=`ps aux|grep 'natapp' | wc -l`
-en='2'
+n=`ps aux|grep 'app/natapp' | wc -l`
+en=2
 echo $n
 
-if test $n == $en
+if test $n -ge  $en
 then
 	echo 'exit'
 else
