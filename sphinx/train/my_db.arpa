@@ -1,0 +1,92 @@
+#############################################################################
+## Copyright (c) 1996, Carnegie Mellon University, Cambridge University,
+## Ronald Rosenfeld and Philip Clarkson
+## Version 3, Copyright (c) 2006, Carnegie Mellon University 
+## Contributors includes Wen Xu, Ananlada Chotimongkol, 
+## David Huggins-Daines, Arthur Chan and Alan Black 
+#############################################################################
+=============================================================================
+===============  This file was produced by the CMU-Cambridge  ===============
+===============     Statistical Language Modeling Toolkit     ===============
+=============================================================================
+This is a 3-gram language model, based on a vocabulary of 7 words,
+  which begins "</s>", "<s>", "停止"...
+This is an OPEN-vocabulary model (type 1)
+  (OOVs were mapped to UNK, which is treated as any other vocabulary word)
+Good-Turing discounting was applied.
+1-gram frequency of frequency : 4 
+2-gram frequency of frequency : 9 0 0 1 0 0 0 
+3-gram frequency of frequency : 13 0 0 0 0 0 0 
+1-gram discounting ratios : 0.67 
+2-gram discounting ratios : 
+3-gram discounting ratios : 
+This file is in the ARPA-standard format introduced by Doug Paul.
+
+p(wd3|wd1,wd2)= if(trigram exists)           p_3(wd1,wd2,wd3)
+                else if(bigram w1,w2 exists) bo_wt_2(w1,w2)*p(wd3|wd2)
+                else                         p(wd3|w2)
+
+p(wd2|wd1)= if(bigram exists) p_2(wd1,wd2)
+            else              bo_wt_1(wd1)*p_1(wd2)
+
+All probs and back-off weights (bo_wt) are given in log10 form.
+
+Data formats:
+
+Beginning of data mark: \data\
+ngram 1=nr            # number of 1-grams
+ngram 2=nr            # number of 2-grams
+ngram 3=nr            # number of 3-grams
+
+\1-grams:
+p_1     wd_1 bo_wt_1
+\2-grams:
+p_2     wd_1 wd_2 bo_wt_2
+\3-grams:
+p_3     wd_1 wd_2 wd_3 
+
+end of data mark: \end\
+
+\data\
+ngram 1=8
+ngram 2=10
+ngram 3=13
+
+\1-grams:
+-1.2900 <UNK>	0.0000
+-0.5119 </s>	-0.5673
+-0.4150 <s>	-0.9127
+-1.2900 停止	0.0000
+-1.2900 前进	-0.3174
+-1.2900 右转	-0.3174
+-1.2900 后退	-0.3174
+-1.2900 左转	-0.3174
+
+\2-grams:
+-0.0792 </s> <s> -0.1347
+-0.7404 <s> 停止 -0.1413
+-0.7404 <s> 前进 0.1761
+-0.7404 <s> 右转 0.1761
+-0.7404 <s> 后退 0.1761
+-0.7404 <s> 左转 0.1761
+-0.1761 前进 </s> 0.4771
+-0.1761 右转 </s> 0.4771
+-0.1761 后退 </s> 0.4771
+-0.1761 左转 </s> 0.4771
+
+\3-grams:
+-0.6990 </s> <s> 停止 
+-0.6990 </s> <s> 右转 
+-0.6990 </s> <s> 后退 
+-0.6990 </s> <s> 左转 
+-0.3010 <s> 停止 </s> 
+-0.3010 <s> 前进 </s> 
+-0.3010 <s> 右转 </s> 
+-0.3010 <s> 后退 </s> 
+-0.3010 <s> 左转 </s> 
+-0.3010 前进 </s> <s> 
+-0.3010 右转 </s> <s> 
+-0.3010 后退 </s> <s> 
+-0.3010 左转 </s> <s> 
+
+\end\

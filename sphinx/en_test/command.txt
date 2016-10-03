@@ -1,0 +1,5 @@
+stop
+forward
+backward
+turn right
+turn left

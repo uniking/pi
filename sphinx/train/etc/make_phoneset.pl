@@ -1,0 +1,1 @@
+/usr/local/lib/sphinxtrain/scripts/prepare/make_phoneset.pl
